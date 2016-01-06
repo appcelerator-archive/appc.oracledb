@@ -1,0 +1,7 @@
+node_modules
+logs
+*.tgz
+conf/local.js
+*.log
+coverage
+.DS_Store
