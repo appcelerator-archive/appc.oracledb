@@ -1,7 +1,7 @@
 module.exports = {
 	logs: './logs',
 	quiet: false,
-	logLevel: 'debug',
+	logLevel: 'trace',
 	apikey: '7OconkD1qE64SKasb3jt2MIgJZih5Th1',
 	APIKeyAuthType: 'none',
 	admin: {
@@ -19,9 +19,16 @@ module.exports = {
 	},
 	connectors: {
 		'appc.oracle': {
+			// Your connection credentials.
 			user: 'hr',
-			password: 'welcome',
-			connectString: 'localhost/XE'
+			password: 'oracle',
+			connectString: 'localhost/orcl',
+
+			// Create models based on your schema that can be used in your API.
+			generateModelsFromSchema: true,
+
+			// Whether or not to generate APIs based on the methods in generated models. 
+			modelAutogen: true
 		}
 	}
 };
