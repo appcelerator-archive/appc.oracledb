@@ -11,7 +11,7 @@ exports.save = {
 		content: 'Tooth'
 	},
 	check: function (result) {
-		should(result.id).be.ok;
+		should(result.getPrimaryKey()).be.ok;
 		should(result.title).equal('Dawson');
 		should(result.content).equal('Tooth');
 	}
