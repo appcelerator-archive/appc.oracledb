@@ -18,10 +18,10 @@ module.exports = {
 		activeDuration: 1000 * 60 * 5 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
 	},
 	connectors: {
-		'appc.oracle': {
+		'appc.oracledb': {
 			// Your connection credentials.
 			user: 'hr',
-			password: 'oracle',
+			password: 'oracledb',
 			connectString: 'localhost/orcl',
 
 			// Create models based on your schema that can be used in your API.

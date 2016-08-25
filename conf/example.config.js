@@ -1,9 +1,9 @@
 module.exports = {
 	connectors: {
-		'appc.oracle': {
+		'appc.oracledb': {
 			// Your connection credentials.
 			user: 'hr',
-			password: 'oracle',
+			password: 'oracledb',
 			connectString: 'localhost/orcl',
 			
 			// Create models based on your schema that can be used in your API.

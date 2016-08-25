@@ -11,7 +11,7 @@ https://github.com/oracle/node-oracledb/blob/master/INSTALL.md#instosx
 Then, use the connector in your project:
 
 ```bash
-$ appc install connector/appc.oracle --save
+$ appc install connector/appc.oracledb --save
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ var Account = Arrow.Model.extend('Account', {
 	fields: {
 		Name: { type: String, required: true, validator: /[a-zA-Z]{3,}/ }
 	},
-	connector: 'appc.oracle'
+	connector: 'appc.oracledb'
 });
 ```
 
@@ -35,9 +35,9 @@ var Account = Arrow.Model.extend('account', {
 	fields: {
 		Name: { type: String, required: false, validator: /[a-zA-Z]{3,}/ }
 	},
-	connector: 'appc.oracle',
+	connector: 'appc.oracledb',
 	metadata: {
-		'appc.oracle': {
+		'appc.oracledb': {
 			table: 'accounts'
 		}
 	}
