@@ -1,6 +1,6 @@
 # Oracle Connector
 
-This is an Arrow connector to Oracle.
+This is an Arrow connector to Oracle Database.
 
 ## Installation
 
