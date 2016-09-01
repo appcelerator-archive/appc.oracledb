@@ -35,12 +35,7 @@ describe('Connector', function () {
 	});
 
 	it('should getTableSchema', function () {
-		var model = connector.getModel('TEST_POST'),
-			results = connector.getTableSchema(model);
-		should(results).be.ok;
-		should(Object.keys(results).length).be.ok;
-
-		results = connector.getTableSchema('TEST_POST');
+		var results = connector.getTableSchema('TEST_POST');
 		should(results).be.ok;
 		should(Object.keys(results).length).be.ok;
 	});
