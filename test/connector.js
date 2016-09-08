@@ -61,7 +61,7 @@ describe('Connector', function () {
 		try {
 			connector.getConnection = function (cb) {
 				cb(null, {
-					execute: function (query, data, cb) {
+					execute: function (query, data, options, cb) {
 						cb(new Error('test error'));
 					}
 				});
