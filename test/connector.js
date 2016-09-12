@@ -5,7 +5,8 @@ var should = require('should'),
 	base = require('./_base'),
 	Arrow = base.Arrow,
 	server = base.server,
-	connector = base.connector;
+	connector = base.connector,
+	model = require('./capabilities/model.js').model;
 
 describe('Connector', function () {
 
@@ -126,6 +127,21 @@ describe('Connector', function () {
 			foo: {$like: 'bar'}
 		}, {})).eql(' WHERE "FOO" LIKE :foo');
 
+	});
+
+	it('should return the number of rows', function (done) {
+		connector.create(model, {
+			title: 'Nolan',
+			content: 'Wright'
+		}, function (err) {
+			should(err).be.ok;
+
+			connector.count(model, null, function (err, result) {
+				should(err).be.ok;
+				should(result).equal(1);
+				done();
+			});
+		});
 	});
 
 });
