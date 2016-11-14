@@ -6,7 +6,12 @@ var should = require('should'),
 	Arrow = base.Arrow,
 	server = base.server,
 	connector = base.connector,
-	model = require('./capabilities/model.js').model;
+	model = require('./capabilities/model.js').model,
+	noPkModel = require('./capabilities/model.js').noPkModel;
+
+// Set model's connector
+model.setConnector(connector);
+noPkModel.setConnector(connector);
 
 describe('Connector', function () {
 
@@ -141,6 +146,81 @@ describe('Connector', function () {
 				should(result).equal(1);
 				done();
 			});
+		});
+	});
+
+	it('should return undefined when looking for missing record', function (done) {
+		connector.findByID(model, -1, function (err, instance) {
+			should(err).be.ok;
+			should(instance).be.undefined;
+			done();
+		});
+	});
+
+	it('should execute query with useResultSet', function (done) {
+		var _getConnection = connector.getConnection;
+		try {
+			connector.getConnection = function (cb) {
+				cb(new Error('test error'));
+			};
+			connector._query('SELECT 1', {}, {
+				useResultSet: true
+			}, function (err) {
+				should(err).be.ok;
+				done();
+			}, null);
+		}
+		finally {
+			connector.getConnection = _getConnection;
+		}
+	});
+
+	it('should getTableSchema', function () {
+		var results = connector.getTableSchema('TEST_CATEGORY');
+		should(results).be.ok;
+		should(Object.keys(results).length).be.ok;
+	});
+
+	it('should not return instance when try to delete instance twice', function (done) {
+		connector.create(model, {
+			title: 'Nolan',
+			content: 'Wright'
+		}, function (err, instance) {
+			should(err).be.ok;
+
+			instance.delete(function (err, result) {
+				should(err).be.ok;
+				should(result).be.an.Object;
+
+				connector.delete(model, instance, function (err, result) {
+					should(err).be.ok;
+					should(result).be.undefined;
+					done();
+				});
+			});
+		});
+	});
+
+	it('should throw error when create instance on model with no primaryKey', function (done) {
+		connector.create(noPkModel, {
+			category: 'Sports'
+		}, function (err) {
+			should(err).not.be.ok;
+			done();
+		});
+	});
+
+	it('should should throw error when delete model with no primaryKey', function (done) {
+		connector.deleteAll(noPkModel, function (err) {
+			should(err).not.be.ok;
+			done();
+		});
+	});
+
+	it('should should throw error when find model with no primaryKey', function (done) {
+		connector.findByID(noPkModel, -1, function (err) {
+			should(err).not.be.ok;
+			done();
 		});
 	});
 
