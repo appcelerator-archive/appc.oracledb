@@ -7,3 +7,9 @@ exports.model = Arrow.Model.extend('TEST_Post', {
 		content: {type: String}
 	}
 });
+
+exports.noPkModel = Arrow.Model.extend('TEST_Category', {
+	fields: {
+		category: {type: String}
+	}
+});

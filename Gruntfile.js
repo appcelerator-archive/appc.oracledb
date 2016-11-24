@@ -41,7 +41,12 @@ module.exports = function (grunt) {
 						' title VARCHAR2(255),' +
 						' content VARCHAR2(255),' +
 						' CONSTRAINT test_post_id PRIMARY KEY (id)' +
-						')'
+						')',
+						'DROP TABLE TEST_Category PURGE',
+						'CREATE TABLE TEST_Category (' +
+						' id NUMBER,' +
+						' category VARCHAR2(255)' +
+						')',
 					],
 					function (sql, next) {
 						connection.execute(
