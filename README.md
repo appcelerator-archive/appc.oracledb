@@ -4,9 +4,11 @@ This is an Arrow connector to Oracle Database.
 
 ## Prerequisites
 
-This connector requires Oracle Instant Client.
+This connector requires Oracle Instant Client installed. To install it, please follow the instructions for your environment here:
+http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html
 
-To install it, follow the steps described here: https://github.com/oracle/node-oracledb/blob/master/INSTALL.md#instosx
+The connector also depends on the 'node-oracledb' module. To be able to properly install the connector, please check the prerequisites here:
+https://github.com/oracle/node-oracledb#-installation
 
 ## Installation
 
