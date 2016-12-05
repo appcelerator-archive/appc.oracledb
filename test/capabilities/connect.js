@@ -1,7 +1,7 @@
 // jscs:disable jsDoc
 var _ = require('lodash');
 
-var goodConfig = require('../../conf/default').connectors['appc.oracledb'];
+var goodConfig = require('../../conf/local').connectors['appc.oracledb'];
 
 exports.connect = {
 	goodConfig: goodConfig,

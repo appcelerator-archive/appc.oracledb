@@ -28,7 +28,7 @@ module.exports = function (grunt) {
 	// Test Setup
 	grunt.registerTask('createTestData', function () {
 		var cb = this.async(),
-			config = require('./conf/default').connectors['appc.oracledb'],
+			config = require('./conf/local').connectors['appc.oracledb'],
 			OracleDB = require('oracledb');
 		OracleDB.getConnection(config, function (err, connection) {
 			if (err) {
