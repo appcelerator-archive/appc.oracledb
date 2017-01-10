@@ -224,4 +224,31 @@ describe('Connector', function () {
 		});
 	});
 
+	it('should handles connection errors', function (next) {
+		var getConnectionCached = connector.getConnection;
+		var disconnectCached = connector.disconnect;
+
+		// Connector methods stub
+		connector.getConnection = function (callback) {
+			callback(null, {
+				execute: function (query, data, options, cb) {
+					cb({
+						message: 'ORA-03113'
+					});
+				}
+			});
+		};
+
+		connector.disconnect = function (callback) {
+			callback();
+		};
+
+		connector.findAll(model, function (err) {
+			should(err.message).containEql('ORA-03113');
+			connector.getConnection = getConnectionCached;
+			connector.disconnect = disconnectCached;
+			next();
+		});
+	});
+
 });
