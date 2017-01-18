@@ -1,7 +1,7 @@
 {
   "name": "appc.oracledb",
   "description": "Oracle Database Connector",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "author": "Dawson Toth",
   "maintainers": [
     "Dawson Toth <dtoth@appcelerator.com>"
