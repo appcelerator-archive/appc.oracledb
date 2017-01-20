@@ -15,7 +15,7 @@ https://github.com/oracle/node-oracledb#-installation
 To install the connector use:
 
 ```bash
-$ appc install connector/appc.oracledb --save
+$ appc install connector/appc.oracledb
 ```
 
 ## Configuration
