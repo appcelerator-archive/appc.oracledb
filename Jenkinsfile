@@ -2,7 +2,8 @@
 @Library('pipeline-library') _
 
 timestamps {
-	node('git && curl && unzip && osx') {
+	// Force to a non-axway network build node to be able to connect to Oracle DB
+	node('git && curl && unzip && osx && !axway-internal') {
 		stage('Checkout') {
 			checkout scm
 		}
