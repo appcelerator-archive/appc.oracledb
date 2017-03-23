@@ -22,18 +22,18 @@ describe('Connector', function () {
 		};
 
 		should(function () {
-			require('../lib/index').create({
+			require('../../lib/index').create({
 				Connector: mockConnector
 			});
 		}).throw();
 		should(function () {
-			require('../lib/index').create({
+			require('../../lib/index').create({
 				Version: '1.2.0',
 				Connector: mockConnector
 			});
 		}).throw();
 		should(function () {
-			require('../lib/index').create({
+			require('../../lib/index').create({
 				Version: '1.7.0',
 				Connector: mockConnector
 			});

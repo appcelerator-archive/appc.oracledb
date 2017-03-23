@@ -29,13 +29,34 @@
     "grunt": "^0.4.5",
     "grunt-appc-js": "^1.0.19",
     "grunt-contrib-clean": "^0.7.0",
-    "grunt-mocha-istanbul": "^3.0.1",
     "istanbul": "^0.4.1",
     "mocha": "^2.3.4",
-    "should": "^8.0.2"
+    "mockery": "^2.0.0",
+    "nsp": "^2.6.3",
+    "nyc": "^10.2.0",
+    "retire": "^1.2.12",
+    "rimraf": "^2.6.1",
+    "should": "^8.0.2",
+    "sinon": "^2.1.0",
+    "snazzy": "^6.0.0",
+    "standard": "^9.0.1",
+    "tap": "^10.3.0"
   },
   "scripts": {
     "start": "appc run",
-    "test": "grunt"
+    "lint": "standard --fix | snazzy",
+    "check-security": "nsp check || true",
+    "check-deps": "retire || true",
+    "clean": "rimraf ./tmp",
+    "checks": "npm run check-deps && npm run check-security",
+    "test": "npm run checks && npm run test:unit && npm run clean",
+    "test:coverage": "nyc check-coverage --lines 90 --functions 95 --branches 85 --statements 90",
+    "test:unit": "tap ./test/unit/* --color --bail --coverage --coverage-report=html && npm run test:coverage",
+    "test:integration": "grunt"
+  },
+  "standard": {
+    "ignore": [
+      "test/integration/**"
+    ]
   }
 }
