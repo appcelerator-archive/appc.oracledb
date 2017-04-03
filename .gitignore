@@ -6,3 +6,4 @@ conf/local.js
 coverage
 .DS_Store
 .vscode/*
+.nyc_output
