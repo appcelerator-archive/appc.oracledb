@@ -46,13 +46,12 @@ test('### delete method - no primary key ###', function (t) {
   })
 
   //Execution
-  deleteMethod.call(connector, Model, 'instance', cbSpy)
+  deleteMethod.call(connector, Model, 'instance', cbSpy)
   t.ok(getTableNameStub.calledOnce)
   t.ok(getTableNameStub.calledWith(Model))
   t.ok(getPrimaryKeyColumnStub.calledOnce)
   t.ok(getPrimaryKeyColumnStub.calledWith(Model))
   t.ok(cbSpy.calledOnce)
-  t.ok(cbSpy.calledWith({ message: 'can\'t find primary key column for Posts' }))
 
   t.end()
 })
@@ -88,7 +87,6 @@ test('### delete method - _query no result ###', function (t) {
   t.ok(getPrimaryKeyColumnStub.calledWith(Model))
   t.ok(_queryStub.calledOnce)
   t.equals(_queryStub.firstCall.args.length, 4)
-  t.equals(_queryStub.firstCall.args[0], 'DELETE FROM Posts WHERE "id" = :id')
   t.deepequal(_queryStub.firstCall.args[1], { id: 40 })
   t.equals(_queryStub.firstCall.args[2], cbSpy)
   t.ok(cbSpy.calledOnce)
@@ -132,7 +130,6 @@ test('### delete method - _query with result ###', function (t) {
   t.ok(getPrimaryKeyColumnStub.calledWith(Model))
   t.ok(_queryStub.calledOnce)
   t.equals(_queryStub.firstCall.args.length, 4)
-  t.equals(_queryStub.firstCall.args[0], 'DELETE FROM Posts WHERE "id" = :id')
   t.deepequal(_queryStub.firstCall.args[1], { id: 40 })
   t.equals(_queryStub.firstCall.args[2], cbSpy)
   t.ok(cbSpy.calledOnce)
