@@ -46,11 +46,10 @@
   "scripts": {
     "start": "appc run",
     "lint": "standard --fix | snazzy",
-    "check-security": "nsp check || true",
-    "check-deps": "retire || true",
+    "security": "retire --exitwith 0 --outputpath scan-retire.txt && nsp check --output writefile --warn-only",
     "clean": "rimraf ./tmp",
     "checks": "npm run check-deps && npm run check-security",
-    "test": "npm run checks && npm run test:unit && npm run clean",
+    "test": "npm run lint && npm run security && npm run test:unit && npm run clean",
     "test:coverage": "nyc check-coverage --lines 90 --functions 95 --branches 85 --statements 90",
     "test:unit": "tap ./test/unit/* --color --bail --coverage --coverage-report=html && npm run test:coverage",
     "test:integration": "grunt"

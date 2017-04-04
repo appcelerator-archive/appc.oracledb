@@ -49,7 +49,7 @@ test('### _query unit test - getConnection firstCall Error ###', function (t) {
   // Stubs and spies
   const cbSpy = sandbox.spy()
   getConnectionStub.callsFake((callback) => {
-    callback('Error message');
+    callback('Error message')
   })
 
   // Execution
@@ -62,7 +62,6 @@ test('### _query unit test - getConnection firstCall Error ###', function (t) {
   t.type(getConnectionStub.firstCall.args[0], 'function')
   t.ok(cbSpy.calledOnce)
   t.equals(cbSpy.firstCall.args[0], 'Error message')
-
 
   t.end()
 })
@@ -82,7 +81,7 @@ test('### _query unit test - connection.execute error ###', function (t) {
   })
   connection.execute = connectionStub
   getConnectionStub.callsFake((callback) => {
-    callback(null, connection);
+    callback(null, connection)
   })
 
   // Execution
@@ -119,8 +118,8 @@ test('### _query unit test - connection.execute ORACLE error ###', function (t) 
   })
   connection.execute = connectionStub
   const disconnectStub = sandbox.stub(connector, 'disconnect').callsFake((next) => {
-    connector.connection = null;
-    next();
+    connector.connection = null
+    next()
   })
   const connectStub = sandbox.stub(connector, 'connect').callsFake((callback) => {
     callback(null, 'test')
@@ -151,7 +150,7 @@ test('### _query unit test - getConnection error ###', function (t) {
 
   // Stubs and spies
   const disconnectStub = sandbox.stub(connector, 'disconnect').callsFake((next) => {
-    connector.connection = null;
+    connector.connection = null
     next()
   })
   const connectStub = sandbox.stub(connector, 'connect').callsFake((callback) => {
@@ -166,7 +165,7 @@ test('### _query unit test - getConnection error ###', function (t) {
     callback(null, connection)
   })
   getConnectionStub.onSecondCall().callsFake((callback) => {
-    callback('Get connection error', connection);
+    callback('Get connection error', connection)
   })
 
   const cbSpy = sandbox.spy()
@@ -198,7 +197,7 @@ test('### _query unit test - getConnection no connection ###', function (t) {
 
   // Stubs and spies
   const disconnectStub = sandbox.stub(connector, 'disconnect').callsFake((next) => {
-    connector.connection = null;
+    connector.connection = null
     next()
   })
   const connectStub = sandbox.stub(connector, 'connect').callsFake((callback) => {
@@ -213,7 +212,7 @@ test('### _query unit test - getConnection no connection ###', function (t) {
     callback(null, connection)
   })
   getConnectionStub.onSecondCall().callsFake((callback) => {
-    callback(null, undefined);
+    callback(null, undefined)
   })
 
   const cbSpy = sandbox.spy()
@@ -446,7 +445,7 @@ test('### _query unit test - fetchRowsFromResultSet call ###', function (t) {
 })
 
 test('### _query unit test - fetchRowsFromResultSet call ###', function (t) {
-  // Data 
+  // Data
   const options = {
     useResultSet: true
   }
@@ -492,6 +491,7 @@ test('### _query unit test - fetchRowsFromResultSet call ###', function (t) {
   t.equals(loggerSpy.firstCall.args[1], 'query')
   t.equals(loggerSpy.firstCall.args[2], 'data')
   t.ok(getConnectionStub.calledOnce)
+  t.ok(translateResultsStub.calledOnce)
   t.ok(cbSpy.notCalled)
   t.ok(executor.calledOnce)
   t.equals(executor.firstCall.args[0], 'test')
@@ -511,7 +511,7 @@ test('### _query unit test - fetchRowsFromResultSet call ###', function (t) {
 })
 
 test('### _query unit test - with 4 args ###', function (t) {
-  // Data 
+  // Data
   const options = {
     useResultSet: true
   }
@@ -549,7 +549,6 @@ test('### _query unit test - with 4 args ###', function (t) {
     return 'test'
   })
   const cbSpy = sandbox.spy()
-  const executor = sandbox.spy()
 
   // Execution
   _query.call(connector, 'query', 'data', options, cbSpy)
@@ -581,9 +580,6 @@ test('### _query unit test - with 4 args ###', function (t) {
 
 test('### _query unit test - with less than 4 args ###', function (t) {
   // Data
-  const options = {
-    useResultSet: true
-  }
   const result = {
     resultSet: {}
   }
@@ -637,20 +633,17 @@ test('### _query unit test - with less than 4 args ###', function (t) {
   t.deepequal(connectionStub.firstCall.args[2], queryOptions)
   t.type(connectionStub.firstCall.args[3], 'function')
   t.ok(translateResultsStub.calledOnce)
+  t.ok(_Stub.calledOnce)
   t.deepequal(translateResultsStub.firstCall.args[0], result)
 
   t.end()
 })
 
 test('### _query unit test - with less than 4 args ###', function (t) {
-  // Data 
-  const options = {
-    useResultSet: true
-  }
+  // Data
   const result = {
     resultSet: {}
   }
-  const rows = ['BOOKS', 'BOOK_ID', 'VARCHAR2', 20, null, 'N']
   const connection = {}
   const queryOptions = { autoCommit: true, maxRows: 1000 }
 
@@ -681,6 +674,7 @@ test('### _query unit test - with less than 4 args ###', function (t) {
   t.ok(getConnectionStub.calledOnce)
   t.type(getConnectionStub.firstCall.args[0], 'function')
   t.ok(cbSpy.calledOnce)
+  t.ok(_Stub.calledOnce)
   t.equals(cbSpy.firstCall.args[0], 'test')
   t.deepequal(cbSpy.firstCall.args[1], result)
   t.ok(translateResultsStub.calledOnce)
