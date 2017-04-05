@@ -36,7 +36,7 @@ test('### Start Arrow ###', function (t) {
 })
 test('## findByID unit test - no primary key ###', function (t) {
   // Data
-  const error = { message: 'can\'t find primary key column for Posts'}
+  const error = { message: 'can\'t find primary key column for Posts' }
   // Stubs and spies
   const cbSpy = sandbox.spy()
   const getTableNameStub = sandbox.stub(connector, 'getTableName').callsFake((Model) => {
@@ -56,7 +56,7 @@ test('## findByID unit test - no primary key ###', function (t) {
   t.ok(getPrimaryKeyColumnStub.calledOnce)
   t.equals(getPrimaryKeyColumnStub.firstCall.args[0], Model)
   t.ok(escapeKeysStub.calledOnce)
-  t.deepequal(escapeKeysStub.firstCall.args[0], ["title", "content", "books"])
+  t.deepequal(escapeKeysStub.firstCall.args[0], ['title', 'content', 'books'])
   t.ok(cbSpy.calledOnce)
   t.ok(cbSpy.calledWith(error))
 
@@ -88,7 +88,7 @@ test('## findByID unit test - no results ###', function (t) {
   t.ok(getPrimaryKeyColumnStub.calledOnce)
   t.equals(getPrimaryKeyColumnStub.firstCall.args[0], Model)
   t.ok(escapeKeysStub.calledOnce)
-  t.deepequal(escapeKeysStub.firstCall.args[0], ["title", "content", "books"])
+  t.deepequal(escapeKeysStub.firstCall.args[0], ['title', 'content', 'books'])
   t.ok(_queryStub.calledOnce)
   t.equals(_queryStub.firstCall.args[0], query)
   t.deepequal(_queryStub.firstCall.args[1], { id: 'id' })
@@ -100,7 +100,7 @@ test('## findByID unit test - no results ###', function (t) {
   t.end()
 })
 test('## findByID unit test - _query with results ###', function (t) {
-  // Data 
+  // Data
   const rows = ['']
   const instance = Model.instance(rows, true)
   const query = 'SELECT id, "TITLE", "CONTENT", "BOOKS" FROM Posts WHERE ROWNUM <= 1 AND "id" = :id'
@@ -130,7 +130,7 @@ test('## findByID unit test - _query with results ###', function (t) {
   t.ok(getPrimaryKeyColumnStub.calledOnce)
   t.equals(getPrimaryKeyColumnStub.firstCall.args[0], Model)
   t.ok(escapeKeysStub.calledOnce)
-  t.deepequal(escapeKeysStub.firstCall.args[0], ["title", "content", "books"])
+  t.deepequal(escapeKeysStub.firstCall.args[0], ['title', 'content', 'books'])
   t.ok(_queryStub.calledOnce)
   t.equals(_queryStub.firstCall.args[0], query)
   t.deepequal(_queryStub.firstCall.args[1], { id: 'id' })
