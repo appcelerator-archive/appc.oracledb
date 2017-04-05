@@ -12,6 +12,7 @@ timestamps {
 		stage('Configuration') {
 			echo '*********** INSTALLING ORACLE INSTANT CLIENT ***********'
 			// TODO Use parallel to download and unzip these two files
+			sh 'rm -rf oracle'
 			sh 'curl -k -L -O https://github.com/appcelerator/appc.oracledb/releases/download/2.0.1/instantclient-basic-macos.x64-12.1.0.2.0.zip'
 			sh 'curl -k -L -O https://github.com/appcelerator/appc.oracledb/releases/download/2.0.1/instantclient-sdk-macos.x64-12.1.0.2.0.zip'
 			sh 'mkdir oracle'
