@@ -5,7 +5,7 @@ const fetchColumns = require('../../../lib/utility/fetchColumns').fetchColumns
 
 test('### fetchColumns unit test ###', function (t) {
   const payload = {
-    name : 'John',
+    name: 'John',
     age: 25
   }
   var keys = fetchColumns(payload)

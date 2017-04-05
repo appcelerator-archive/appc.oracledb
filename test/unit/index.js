@@ -16,7 +16,7 @@ test('### Should returns connector capabilities ###', function (t) {
         CanCreate: 'CanCreate',
         CanRetrieve: 'CanRetrieve',
         CanUpdate: 'CanUpdate',
-        CanDelete: 'CanDelete',
+        CanDelete: 'CanDelete'
       },
       extend: (capabilities) => {
         connectorExtendSpy()
