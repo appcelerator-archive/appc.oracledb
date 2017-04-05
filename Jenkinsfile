@@ -3,7 +3,7 @@
 
 timestamps {
 	// Force to a non-axway network build node to be able to connect to Oracle DB
-	node('git && curl && unzip && osx && !axway-internal') {
+	node('git && curl && unzip && osx') {
 		stage('Checkout') {
 			checkout scm
 		}
@@ -26,7 +26,7 @@ timestamps {
 			withEnv(["PATH+NODE=${nodeHome}/bin", "OCI_LIB_DIR=${env.WORKSPACE}/oracle/instantclient", "OCI_INC_DIR=${env.WORKSPACE}/oracle/instantclient/sdk/include"]) {
 				sh 'npm install oracledb'
 			}
-			sh "echo \"module.exports = {connectors: {'appc.oracledb': {user: 'arrowtest', password: 'ov7RA3c629DqKhOxiJjXGPre', connectString: 'oracle-arrowconnector-test.ciwqelgzutsp.us-west-2.rds.amazonaws.com:1521/ARRCONN'}}};\" > conf/local.js"
+			sh "echo \"module.exports = {connectors: {'appc.oracledb': { }}};\" > conf/local.js"
 		}
 
 		buildConnector {
