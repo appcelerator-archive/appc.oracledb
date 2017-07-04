@@ -26,6 +26,12 @@
   },
   "devDependencies": {
     "arrow": "^*",
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.0.0",
+    "babel-istanbul": "^0.12.1",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-stage-2": "^6.22.0",
     "grunt": "^0.4.5",
     "grunt-appc-js": "^1.0.19",
     "grunt-contrib-clean": "^0.7.0",
@@ -45,8 +51,9 @@
   },
   "scripts": {
     "start": "appc run",
+    "build:lib": "babel ./lib -d ./src",
     "lint": "standard --fix",
-    "security": "retire --exitwith 0 --outputpath scan-retire.txt && nsp check --output writefile --warn-only",
+    "security": "retire --exitwith 0 --package --outputformat json --outputpath scan-retire.json && nsp check --output json > scan-nsp.json",
     "clean": "rimraf ./tmp",
     "test": "npm run security && npm run test:unit && npm run clean",
     "test:coverage": "nyc check-coverage --lines 95 --functions 95 --branches 85 --statements 95",
