@@ -55,7 +55,7 @@
   },
   "scripts": {
     "start": "appc run",
-    "build": "npm run clean && npm run build:dev && npm run security:retire && npm run security:nsp",
+    "build": "npm run clean && npm run build:dev && npm run security",
     "build:dev": "npm run build:dist",
     "build:dist": "babel -d ./dist ./lib",
     "lint": "standard --fix",
@@ -64,6 +64,7 @@
     "test:coverage": "nyc check-coverage --lines 95 --functions 95 --branches 85 --statements 95",
     "test:unit": "tap ./test/unit/* --color --bail --coverage --coverage-report=html && npm run test:coverage",
     "test:integration": "grunt",
+    "security": "security:retire && security:nsp",
     "security:retire": "retire --exitwith 0 --package --outputformat json --outputpath scan-retire.json",
     "security:nsp": "nsp check --output json > scan-nsp.json"
   },
