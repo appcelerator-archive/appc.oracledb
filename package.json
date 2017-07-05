@@ -12,6 +12,10 @@
     "appcelerator",
     "arrow"
   ],
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/appcelerator/appc.oracledb"
@@ -51,14 +55,16 @@
   },
   "scripts": {
     "start": "appc run",
-    "build:lib": "babel ./lib -d ./src",
+    "build": "npm run clean && npm run build:dev && npm run security",
+    "build:dev": "npm run build:dist",
+    "build:dist": "babel -d ./dist ./lib",
     "lint": "standard --fix",
-    "security": "retire --exitwith 0 --package --outputformat json --outputpath scan-retire.json && nsp check --output json > scan-nsp.json",
-    "clean": "rimraf ./tmp",
+    "clean": "rimraf ./tmp && rimraf dist/* coverage/*",
     "test": "npm run security && npm run test:unit && npm run clean",
     "test:coverage": "nyc check-coverage --lines 95 --functions 95 --branches 85 --statements 95",
     "test:unit": "tap ./test/unit/* --color --bail --coverage --coverage-report=html && npm run test:coverage",
-    "test:integration": "grunt"
+    "test:integration": "grunt",
+    "security": "retire --exitwith 0 --package --outputformat json --outputpath scan-retire.json && nsp check --output json > scan-nsp.json"
   },
   "standard": {
     "ignore": [
