@@ -12,10 +12,6 @@
     "appcelerator",
     "arrow"
   ],
-  "files": [
-    "dist"
-  ],
-  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/appcelerator/appc.oracledb"
@@ -60,7 +56,7 @@
     "build:dist": "babel -d ./dist ./lib",
     "lint": "standard --fix",
     "clean": "rimraf ./tmp && rimraf dist/* coverage/*",
-    "test": "npm run security && npm run test:unit && npm run clean",
+    "test": "npm run clean && npm run security && npm run test:unit",
     "test:coverage": "nyc check-coverage --lines 95 --functions 95 --branches 85 --statements 95",
     "test:unit": "tap ./test/unit/* --color --bail --coverage --coverage-report=html && npm run test:coverage",
     "test:integration": "grunt",
