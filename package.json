@@ -56,11 +56,11 @@
     "build:dist": "babel -d ./dist ./lib",
     "lint": "standard --fix",
     "clean": "rm -rf ./tmp && rm -rf dist/* coverage/*",
-    "test": "npm run clean && npm run security && npm run test:unit",
+    "test": "npm run clean && npm run test:unit",
     "test:coverage": "nyc check-coverage --lines 95 --functions 95 --branches 85 --statements 95",
     "test:unit": "tap ./test/unit/* --color --bail --coverage --coverage-report=html && npm run test:coverage",
     "test:integration": "grunt",
-    "security": "retire --exitwith 0 --outputpath scan-retire.json && nsp check --output json > scan-nsp.json"
+    "security": "retire --outputpath scan-retire.json && nsp check --output json > scan-nsp.json"
   },
   "standard": {
     "ignore": [
