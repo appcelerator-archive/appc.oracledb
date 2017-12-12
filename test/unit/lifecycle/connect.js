@@ -14,12 +14,12 @@ const OracleDBStub = sinon.stub(OracleDB, 'getConnection')
 
 test('### connect unit test - error case ###', function (t) {
   OracleDBStub.callsFake((config, callback) => {
-    callback('Error')
+    callback(new Error('Error'))
   })
   const cbSpy = sinon.spy()
   connect.call(connector, cbSpy)
   t.ok(cbSpy.calledOnce)
-  t.equals(cbSpy.firstCall.args[0], 'Error')
+  t.equals(cbSpy.firstCall.args[0].message, 'Error')
   t.ok(OracleDBStub.calledOnce)
   t.equals(OracleDBStub.firstCall.args[0], connector.config)
 

@@ -49,7 +49,7 @@ test('### _query unit test - getConnection firstCall Error ###', function (t) {
   // Stubs and spies
   const cbSpy = sandbox.spy()
   getConnectionStub.callsFake((callback) => {
-    callback('Error message')
+    callback(new Error('Error message'))
   })
 
   // Execution
@@ -61,7 +61,7 @@ test('### _query unit test - getConnection firstCall Error ###', function (t) {
   t.ok(getConnectionStub.calledOnce)
   t.type(getConnectionStub.firstCall.args[0], 'function')
   t.ok(cbSpy.calledOnce)
-  t.equals(cbSpy.firstCall.args[0], 'Error message')
+  t.equals(cbSpy.firstCall.args[0].message, 'Error message')
 
   t.end()
 })
@@ -77,7 +77,7 @@ test('### _query unit test - connection.execute error ###', function (t) {
   // Stubs and spies
   const cbSpy = sandbox.spy()
   const connectionStub = sandbox.stub().callsFake((query, data, queryOptions, callback) => {
-    callback('Connection error')
+    callback(new Error('Connection error'))
   })
   connection.execute = connectionStub
   getConnectionStub.callsFake((callback) => {
@@ -97,7 +97,7 @@ test('### _query unit test - connection.execute error ###', function (t) {
   t.deepequal(connectionStub.firstCall.args[2], queryOptions)
   t.type(connectionStub.firstCall.args[3], 'function')
   t.ok(cbSpy.calledOnce)
-  t.equals(cbSpy.firstCall.args[0], 'Connection error')
+  t.equals(cbSpy.firstCall.args[0].message, 'Connection error')
 
   t.end()
 })
@@ -165,7 +165,7 @@ test('### _query unit test - getConnection error ###', function (t) {
     callback(null, connection)
   })
   getConnectionStub.onSecondCall().callsFake((callback) => {
-    callback('Get connection error', connection)
+    callback(new Error('Get connection error', connection))
   })
 
   const cbSpy = sandbox.spy()
@@ -180,7 +180,7 @@ test('### _query unit test - getConnection error ###', function (t) {
   t.ok(connectStub.calledOnce)
   t.ok(disconnectStub.calledOnce)
   t.ok(cbSpy.calledOnce)
-  t.equals(cbSpy.firstCall.args[0], 'Get connection error')
+  t.equals(cbSpy.firstCall.args[0].message, 'No connection to the db.')
 
   t.end()
 })
@@ -231,7 +231,7 @@ test('### _query unit test - getConnection no connection ###', function (t) {
   t.type(connectStub.firstCall.args[0], 'function')
   t.type(disconnectStub.firstCall.args[0], 'function')
   t.ok(cbSpy.calledOnce)
-  t.equals(cbSpy.firstCall.args[0], 'No connection to the db.')
+  t.equals(cbSpy.firstCall.args[0].message, 'No connection to the db.')
 
   t.end()
 })
@@ -295,7 +295,7 @@ test('### _query unit test - fetchRowsFromResultSet call  error case ###', funct
   })
 
   const getRowsStub = sandbox.stub().callsFake((neshto, callback) => {
-    callback('Error')
+    callback(new Error('Error'))
   })
   const closeSpy = sandbox.spy()
   result.resultSet.close = closeSpy
@@ -323,7 +323,7 @@ test('### _query unit test - fetchRowsFromResultSet call  error case ###', funct
   t.ok(closeSpy.calledOnce)
   t.ok(closeSpy.calledWith())
   t.ok(cbSpy.calledOnce)
-  t.equals(cbSpy.firstCall.args[0], 'Error')
+  t.equals(cbSpy.firstCall.args[0].message, 'Error')
 
   t.end()
 })
@@ -414,7 +414,7 @@ test('### _query unit test - fetchRowsFromResultSet call ###', function (t) {
     callback(null, [])
   })
   const closeStub = sandbox.stub().callsFake((callback) => {
-    callback('Error')
+    callback(new Error('Error'))
   })
   result.resultSet.getRows = getRowsStub
   result.resultSet.close = closeStub
@@ -439,7 +439,7 @@ test('### _query unit test - fetchRowsFromResultSet call ###', function (t) {
   t.equals(getRowsStub.firstCall.args[0], 1000)
   t.type(getRowsStub.firstCall.args[1], 'function')
   t.ok(cbSpy.calledOnce)
-  t.equals(cbSpy.firstCall.args[0], 'Error')
+  t.equals(cbSpy.firstCall.args[0].message, 'Error')
 
   t.end()
 })
